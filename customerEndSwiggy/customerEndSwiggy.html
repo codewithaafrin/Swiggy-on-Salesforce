@@ -1,0 +1,472 @@
+<template>
+    <div class="appFont">
+        <template if:true={loginPage}>
+            <div class="slds-size_4-of-6">
+                <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-03" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                    <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                    <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                    </svg>
+                    <span class="slds-assistive-text" >Cancel and close</span>
+                    </button>
+                    <div class="slds-modal__content slds-p-around_medium custom-modal-content2" id="modal-content-id-3">
+                    <h1 class="slds-text-align_center custom-modal-content2 waitingPageFont">LOGIN TO JOIN THE SWIGGY LIFE</h1>
+                    <lightning-input onchange={handleUsernameChange} placeholder="Username"></lightning-input>
+                    <lightning-input type="password" onchange={handlePasswordChange} placeholder="Password"></lightning-input>
+                    <div class="slds-p-top_small slds-align_absolute-center">
+                        <lightning-button label="Login" variant="brand" class="button" onclick={handleLoginBackend}></lightning-button>
+                    </div>
+                    
+                    </div>
+                    </div>
+                    </section>
+                    <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+            </div>
+
+            <!--<lightning-card>
+                <h1>Login</h1>
+                <lightning-input label="Username" onchange={handleUsernameChange}></lightning-input>
+                <lightning-input label="Password" onchange={handlePasswordChange}></lightning-input>
+                <lightning-button label="Login" onclick={handleLoginBackend}></lightning-button>
+            </lightning-card>-->
+        </template>
+        <template if:true={homePage}>
+            <div class="slds-grid slds-wrap">
+                <div class="slds-size_1-of-6">
+        
+                </div>
+        
+                <div class="slds-size_4-of-6">
+                    <div class="slds-m-top_small slds-m-bottom_medium">
+                        <lightning-card>
+                            <lightning-input type="search" class="slds-p-around_medium" placeholder="type a restaurant or dish name to search..." onchange={handleRestaurantOrMenuSearch}></lightning-input>
+                        </lightning-card>
+                
+                    </div>
+                    
+                    <!--<lightning-card class="slds-gutters slds-m-top_small">
+                        <div style="display:flex; flex-wrap: wrap;" >
+                            <template if:true={wiredCategoryPicklist}>
+                                <template for:each={wiredCategoryPicklist} for:item="category">
+                                    <div key={category.value} class=" slds-col slds-size_1-of-5">
+                                        <lightning-card>
+                                            <div class="slds-p-around_small" onclick={handleClickedCategory} data-id ={category.value}>
+                                                <ul style="list-style-type: none; padding: 0; margin: 0;">
+                                                    <li style="text-align:center;">{category.label}</li>
+                                                    <img src={category.Category_Pics} alt={category.label} style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;"/>
+                                                </ul>
+                                            </div>
+                                        </lightning-card>
+                                    </div>
+                                </template>
+                            </template>
+                        </div>
+                    </lightning-card>-->
+                    
+                    <lightning-card class="slds-gutters slds-m-top_small slds-m-bottom_medium removeBorder">
+                        <p class="titleStyle">What's on your mind?</p>
+                        <div style="display: flex; flex-wrap: nowrap; overflow-x: auto;" class="hideScrollbar">
+                            <template if:true={wiredCategoryPicklist}>
+                                <template for:each={wiredCategoryPicklist} for:item="category">
+                                    <div key={category.value} style="flex: 0 0 auto; padding: 8px;" class="slds-m-left_x-large">
+                                        <div onclick={handleClickedCategory} data-id={category.value}>
+                                            <img src={category.Category_Pics} alt={category.label} style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+                                            <div style="text-align: center;" class="styleCategoryLabel">{category.label}</div>
+                                        </div>
+                                    </div>
+                                </template>
+                            </template>
+                        </div>
+                    </lightning-card>
+                    
+                    <div class="slds-grid slds-wrap">
+                        <template for:each={menuAndRestaurantArray} for:item="iterator">
+                            <div key={iterator.Id} class="slds-col slds-size_1-of-4 slds-p-around_small">
+                                <lightning-card class="headerClass" onclick={takeToMenu} data-id={iterator.Id}>
+                                    <div class="slds-p-bottom_small">
+                                        <ul>
+                                            <li><img src={iterator.RestPicTemp} alt='RestaurantPicJPG' class="image-container"></li>
+                                            <div class="slds-p-left_small">
+                                                <li class="restaurantNameStyle">{iterator.Name}</li>
+                                                <li><b>{iterator.stars}</b></li> 
+                                                <template if:true={iterator.UniqueCategories}>
+                                                    <div key={iterator.Id} style="display:flex">
+                                                        <ul style="display:flex">
+                                                            <template for:each={iterator.UniqueCategories} for:item="category">
+                                                                <li key={category}>{category}&nbsp; </li>
+                                                            </template>
+                                                        </ul>
+                                                    </div>
+                                                </template>
+                                            </div>      
+                                        </ul>                                       
+                                    </div>
+                                </lightning-card>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+        
+                <div class="slds-size_1-of-6">
+        
+                </div>
+        
+            </div>
+        </template>
+        
+
+        <template if:true={menuPage}>
+            <div class="slds-grid slds-wrap slds-gutters">
+                <div class="slds-size_1-of-6">
+
+                </div>
+    
+                <div class="slds-size_4-of-6">
+                    <div>
+                        <div>
+                            <div class="slds-p-bottom_small">
+                                <lightning-button label="&lt;" onclick={handleFromMenuBackToMain} class="button" variant="brand"></lightning-button>
+                            </div>
+                            <lightning-card class="slds-m-top_small">
+                                <template for:each={listofMenu} for:item="iterator">
+                                    <div key={iterator.key} class="menu-category">
+                                        <lightning-accordion allow-multiple-sections-open>
+                                            <lightning-accordion-section name="A" label={iterator.key} style="color: #4b4a47; font-size: 20px;">
+                                                <ul>
+                                                    <template for:each={iterator.value} for:item="menuItem">
+                                                        <div key={menuItem.Id} class="menu-item">
+                                                            <div class="menu-details">
+                                                                <div class="food-container">
+                                                                    <span class="food-name">{menuItem.Food_Name__c}</span>
+                                                                </div>
+                                                                <div class="counter-price-container">
+                                                                    <span class="price">₹{menuItem.Price__c}</span>
+                                                                    <div class="counter-container">
+                                                                        <button class="counter-button" onclick={handleDecrement} data-id={menuItem.Id}> - </button>
+                                                                        <span class="counter-value">{menuItem.count}</span>
+                                                                        <button class="counter-button" onclick={handleIncrement} data-id={menuItem.Id}> + </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </template>
+                                                </ul>
+                                            </lightning-accordion-section>
+                                        </lightning-accordion>
+                                    </div>
+                                </template>
+                                 
+                            </lightning-card>  
+                        </div>
+                        <span>
+                            <div class="slds-p-top_small slds-align_absolute-center">
+                                    <lightning-button label="VIEW CART" onclick={takeToCartPage} variant="brand" class="button"></lightning-button>
+                                
+                            </div>
+                        </span>
+                    </div>
+                </div>
+                
+    
+                <div class="slds-size_1-of-6">
+    
+                </div>
+            </div>
+        </template>
+
+        <template if:true={cartPage}>
+            <div class="slds-grid slds-wrap slds-gutters">
+                <div class="slds-size_2-of-12">
+
+                </div>
+                <div class="slds-size_4-of-12">
+                    <div class="slds-p-bottom_small">
+                        <lightning-button label="&lt;" onclick={handleFromCartToHome} class="button" variant="brand"></lightning-button>
+                    </div>                    
+                    <lightning-card title="Your Cart">
+                        <lightning-card>
+                            <template for:each={itemsInCartList} for:item="iterator">
+                                <div key={iterator.key}>
+                                    <ul class="slds-p-left_medium slds-p-right_medium cart-item">
+                                        <li class="flex-item">{iterator.foodName}</li>
+                                        <li class="flex-item">{iterator.count}</li>
+                                        <li class="flex-item">{iterator.totalPerItem}</li>
+                                        
+                                    </ul>
+                                </div>
+                            </template>  
+                        </lightning-card>
+                        <lightning-card>
+                            <ul class="slds-p-left_medium slds-p-right_medium cart-item">
+                                <li class="flex-item"><b>GRAND TOTAL</b></li>
+                                <li class="flex-item"> </li>
+                                <li class="flex-item"><b>₹ {grandTotal}</b></li>
+                                
+                            </ul>
+                        </lightning-card>
+                    </lightning-card>                   
+                </div>
+
+                <div class="slds-size_1-of-12">
+                    
+                </div>
+
+                <div class="slds-size_3-of-12 slds-m-top_medium">
+                    <lightning-card class="slds-p-around_small">
+                        <template for:each={customerarray} for:item="iterator">
+                            <div key={iterator.Id}>
+                                <lightning-tile>
+                                    <div class="slds-p-around_medium">
+                                        <div class="slds-grid slds-wrap">
+                                        <div class="slds-col slds-size_12-of-12 slds-m-bottom--medium">
+                                        <lightning-radio-group 
+                                        name="radioGroup"
+                                        label="Deliver To:"
+                                        options={options}
+                                        value={selectedAddress}
+                                        type="radio" 
+                                        onchange={handleAddressSelected}
+                                        class="radioGroupStyling"
+                                    ></lightning-radio-group>
+                                    </div>
+                                    <template if:true={showWorkAddress}>
+                                        <div>
+                                            <p>{iterator.Work_Address__Street__s}, {iterator.Work_Address__City__s}, {iterator.Work_Address__StateCode__s}, {iterator.Work_Address__PostalCode__s}</p>
+                                        </div>
+                                    </template>
+                                    <template if:true={showHomeAddress}>
+                                        <div>
+                                            <p>{iterator.Home_Address__Street__s}, {iterator.Home_Address__City__s}, {iterator.Home_Address__StateCode__s}, {iterator.Home_Address__PostalCode__s}</p>
+                                        </div>
+                                    </template>
+                                    
+                                    </div>
+                                    </div>
+                                    
+                                    
+                                </lightning-tile>
+                            </div>
+                        </template>
+                    </lightning-card>
+
+                    <div class="slds-p-top_small">
+                        <lightning-button label="PLACE ORDER!" onclick={handleSendItemsListToBackend} variant="brand" class="button"></lightning-button>
+                    </div>
+                </div>
+
+                <div class="slds-size_1-of-12">
+
+                </div>
+
+                
+            </div>
+        </template>
+
+        <template if:true={waitingPage}>
+            <div class="slds-grid slds-wrap slds-gutters">
+
+            </div>
+
+            <div class="slds-size_1-of-6">
+
+            </div>
+
+            <div class="slds-size_4-of-6">
+                <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse ">
+                    <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                    <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                    </svg>
+                    <span class="slds-assistive-text" >Cancel and close</span>
+                    </button>
+                    <div class="slds-modal__content slds-p-around_medium custom-modal-content" id="modal-content-id-1">
+                    <h1 class="slds-text-align_center custom-modal-content waitingPageFont">PLEASE WAIT WHILE THE RESTAURANT CONFIRMS YOUR ORDER!</h1>
+                    <div class="timer-container slds-align_absolute-center slds-m-top_medium slds-m-bottom_medium">
+                        <svg class="progress-ring" width="120" height="120">
+                            <circle class="progress-ring__circle" cx="60" cy="60" r="50"></circle>
+                        </svg>
+                        <span class="timer-value">{formattedTime}</span>
+                    </div>
+                    </div>
+                    </div>
+                    </section>
+                    <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+            </div>
+
+            <div class="slds-size_1-of-6">
+
+            </div>
+        </template>
+
+
+        <template if:true={acceptPage}>
+            <div class="slds-grid slds-wrap slds-gutters">
+
+            </div>
+
+            <div class="slds-size_1-of-6">
+
+            </div>
+
+            <div class="slds-size_4-of-6">
+                <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-03" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                    <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                    <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                    </svg>
+                    <span class="slds-assistive-text" >Cancel and close</span>
+                    </button>
+                    <div class="slds-modal__content slds-p-around_medium custom-modal-content" id="modal-content-id-6">
+                    <h1 class="slds-text-align_center custom-modal-content waitingPageFont">YAY! YOUR ORDER IS CONFIRMED!</h1>
+                    <p class="slds-text-align_center subheadingFont">Please wait while we find you a delivery partner</p>
+                    <div class="slds-m-top_small slds-m-bottom_small">
+                        <div class="slds-align_absolute-center my-icon slds-icon slds-icon_large">
+                            <lightning-icon
+                                icon-name="action:check"
+                                alternative-text="Check"    
+                            >
+                            </lightning-icon>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                    </section>
+                    <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+            </div>
+
+            <div class="slds-size_1-of-6">
+
+            </div>
+        </template>
+
+
+        <template if:true={deliveryPage}>
+            <div class="slds-grid slds-wrap slds-gutters">
+                <div class="slds-size_1-of-6">
+
+                </div>
+    
+                <div class="slds-size_4-of-6">
+                    <lightning-card class="slds-p-around_medium cardBackground">
+                        <h1 class="slds-text-align_center custom-modal-content waitingPageFont">Your Delivery Partner has been assigned and Your Order is on the way!</h1>
+                        <lightning-map
+                            map-markers={mapMarkers}
+                            markers-title="Delivery Route"
+                            onmarkerselect={handleMarkerSelect}
+                            selected-marker-value={selectedMarkerValue}
+                        >
+                        </lightning-map>
+    
+                    </lightning-card>
+                </div>
+    
+                <div class="slds-size_1-of-6">
+    
+                </div>
+            </div>
+            
+        </template>
+
+
+        <template if:true={declinePage}>
+            <div class="slds-grid slds-wrap slds-gutters">
+
+            </div>
+
+            <div class="slds-size_1-of-6">
+
+            </div>
+
+            <div class="slds-size_4-of-6">
+                <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-04" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                    <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                    <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                    </svg>
+                    <span class="slds-assistive-text" >Cancel and close</span>
+                    </button>
+                    <div class="slds-modal__content slds-p-around_medium custom-modal-content" id="modal-content-id-5">
+                    <p><lightning-button class="custom-modal-content button" variant="brand" label="x" onclick={takeFromReviewPageToHome}></lightning-button></p>
+                    <h1 class="slds-text-align_center custom-modal-content">Unfortunately, we are unable to process your order.</h1>
+                    <div class="slds-m-top_small slds-m-bottom_small">
+                        <div class="slds-align_absolute-center my-icon slds-icon slds-icon_large">
+                            <lightning-icon
+                                icon-name="action:reject"
+                                alternative-text="reject"    
+                            >
+                            </lightning-icon>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                    </section>
+                    <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+            </div>
+
+            <div class="slds-size_1-of-6">
+
+            </div>
+        </template>
+
+        <template if:true={reviewPage}>
+            <div class="slds-grid slds-wrap slds-gutters">
+
+            </div>
+
+            <div class="slds-size_1-of-6">
+
+            </div>
+
+            <div class="slds-size_4-of-6">
+                <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                    <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                    <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                    </svg>
+                    <span class="slds-assistive-text" >Cancel and close</span>
+                    </button>
+                    <div class="slds-modal__content slds-p-around_medium custom-modal-content" id="modal-content-id-2">
+                    <p><lightning-button label="x" class="button" variant="brand" onclick={takeFromReviewPageToHome}></lightning-button></p>
+                    <h1 class="slds-text-align_center custom-modal-content waitingPageFont">THANK YOU FOR ORDERING FROM US!</h1>
+                    <h1 class="slds-text-align_center custom-modal-content waitingPageFont">How was your order from {selectedRestaurant.Name}?</h1>
+                    <div>
+                        <div class="slds-p-around_medium lgc-bg slds-text-align_center">
+                            <div class="slds-align_absolute-center">
+                                <lightning-tile type="media">
+                                    <div class="rate">
+                                        <input type="radio" id="star5" name="Delivery" value="5" onchange={ratingStar} />
+                                        <label for="star5" title="text">5 stars</label>
+                                        <input type="radio" id="star4" name="Delivery" value="4" onchange={ratingStar} />
+                                        <label for="star4" title="text">4 stars</label>
+                                        <input type="radio" id="star3" name="Delivery" value="3" onchange={ratingStar} />
+                                        <label for="star3" title="text">3 stars</label>
+                                        <input type="radio" id="star2" name="Delivery" value="2" onchange={ratingStar} />
+                                        <label for="star2" title="text">2 stars</label>
+                                        <input type="radio" id="star1" name="Delivery" value="1" onchange={ratingStar} />
+                                        <label for="star1" title="text">1 star</label>
+                                    </div>
+                                </lightning-tile>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-align_absolute-center">
+                        <lightning-button variant="brand" class="button" label="Submit" onclick={submitReview}></lightning-button>
+                    </div>
+                    </div>
+                    </div>
+                    </section>
+                    <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+            </div>
+
+            <div class="slds-size_1-of-6">
+
+            </div>
+
+        </template>
+    </div>    
+</template>

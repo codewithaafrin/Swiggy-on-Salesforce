@@ -1,0 +1,295 @@
+.outerbox{
+    background-color: orange;
+}
+
+.innerbox{
+    display:flex;
+    align-items: center;
+}
+
+.searchStyle{
+    margin-left:15px;
+    margin-bottom:20px;
+}
+
+.cardStyle{
+    background-color: orange;
+}
+
+.image-container {
+    width: 350px;
+    height: 180px;
+}
+
+.headerClass{
+    --slds-c-card-header-spacing-block-end: 0px;
+    --slds-c-card-header-spacing-block-start: 0px;
+    --slds-c-card-body-spacing-block-start: 0px;
+    --slds-c-card-body-spacing-block-end: 0px;
+}
+
+.hideScrollbar{
+    -webkit-scrollbar: none;
+}
+
+.styleCategoryLabel{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: medium;
+    margin-top: 10px;
+    font-weight: 500;
+    color:hsl(0, 0%, 36%);
+    text-shadow: 1px 1px #cacaca;
+}
+
+.titleStyle{
+    font-size: 22px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    margin-left: 15px;
+}
+
+.removeBorder{
+    border: none;
+    box-shadow: none;
+}
+
+.appFont{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.navBarTitle{
+    --sds-c-card-header-title-color: #ff9900;
+    --sds-c-card-header-title-font-size: 20px; 
+}
+
+.restaurantNameStyle{
+    font-size: 17px;
+    font-weight: 700;
+    color: #4b4a47;
+    margin-top: 5px;
+}
+
+.categoryStyling{
+    font-weight: 800;
+    font-size: 20px;
+    color: #4b4a47;
+}
+
+.menuStyling{
+    font-size: 16px;
+    margin-left: 25px;
+}
+
+.counter-container {
+    display: flex;
+    align-items: center;
+}
+
+.counter-button {
+    font-size: 1.5rem;
+    padding: 0.2rem 0.5rem;
+    margin: 0.2rem;
+    cursor: pointer;
+}
+
+.counter-value {
+    font-size: 1.2rem;
+    margin: 0 0.5rem;
+}
+
+
+.rate {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+
+.rate:not(:checked)>input {
+    position: absolute;
+    top: -9999px;
+}
+
+.rate:not(:checked)>label {
+    float: right;
+    width: 1em;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 30px;
+    color: #ccc;
+}
+
+.rate:not(:checked)>label:before {
+    content: '★ ';
+}
+
+.rate>input:checked~label {
+    color: #ffc700;
+}
+
+.rate:not(:checked)>label:hover,
+.rate:not(:checked)>label:hover~label {
+    color: #deb217;
+}
+
+.rate>input:checked+label:hover,
+.rate>input:checked+label:hover~label,
+.rate>input:checked~label:hover,
+.rate>input:checked~label:hover~label,
+.rate>label:hover~input:checked~label {
+    color: #c59b08;
+}
+
+    .timer-container {
+        position: relative;
+        width: 120px;
+        height: 120px;
+    }
+
+    .progress-ring {
+        transform: rotate(-90deg);
+    }
+
+    .progress-ring__circle {
+        fill: none;
+        stroke:  #f4f7f9; /* Adjust color as needed */
+        stroke-width: 5;
+        stroke-dasharray: 314; /* Circumference of a circle with radius 50 */
+        stroke-dashoffset: 314;
+        transition: stroke-dashoffset 1s linear;
+    }
+
+    .timer-value {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 24px;
+        color:#f4f7f9; /* Adjust color as needed */
+        font-weight: 600;
+    }
+
+    .menu-category {
+        margin-bottom: 20px;
+    }
+    
+    .menu-item {
+        margin-bottom: 10px;
+        background-color: #fff;
+        padding-left: 40px;
+    }
+    
+    .menu-details {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .food-container {
+        display: flex;
+        align-items: center;
+    }
+    
+    .food-name {
+        font-size: 14px;
+        margin-right: 10px;
+    }
+    
+    .counter-price-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .counter-container {
+        display: flex;
+        align-items: center;
+        padding-right: 50px;
+    }
+    
+    .counter-button {
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        padding: 2px 5px;
+        font-size: 14px;
+        cursor: pointer;
+    }
+    
+    .counter-value {
+        font-size: 16px;
+        margin: 0 8px;
+    }
+    
+    .price {
+        font-size: 14px;
+        color: #ff5722;
+    }
+
+    .lightning-accordion-section-header {
+        font-weight: bold;
+        font-size: 16px; /* Adjust the font size as needed */
+    }
+
+    .button {
+        --slds-c-button-brand-color-background: #eb6216;
+        --slds-c-button-brand-color-border:  #eb6216;
+        --sds-c-button-text-color: #f4f7f9;
+        --slds-c-button-brand-color-border-hover: #f67f15;
+        --slds-c-button-brand-color-background-hover: #f67f15;
+    }
+
+    .cart-item {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .flex-item {
+        flex: 1;
+        text-align: center;
+    }
+
+    .radio-group {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .custom-modal-content {
+        background-color: #eb6216; /* Orange color code */
+        border-radius: 0.25rem; /* Optional: Add border-radius for rounded corners */
+        color: #ffffff; /* Set text color to white or another readable color */
+    }
+
+    .custom-modal-content2{
+        background-color: #eb6216; /* Orange color code */
+        border-radius: 0.25rem;
+    }
+
+    .waitingPageFont{
+        font-size: small;
+        font-family: georgia;
+        font-weight: 600;
+        color: #ffffff;
+    }
+    
+    .subheadingFont{
+        font-size: x-small;
+        font-family: georgia;
+    }
+
+    .my-icon {
+        --slds-c-icon-color-foreground: #eb6216; 
+        --slds-c-icon-color-background: white;
+    }   
+
+    .cardBackground{  
+        --slds-c-card-color-background:#eb6216;
+    }
+
+    
+
+    
+
+    
+    
+    
